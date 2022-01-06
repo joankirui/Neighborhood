@@ -1,8 +1,11 @@
+from django.contrib.auth import login
 from django.shortcuts import  render, redirect
 from .forms import RegisterForm
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.contrib import messages
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, request
+
 
 # Create your views here.
 def registration(request):
@@ -18,3 +21,10 @@ def registration(request):
         else:
             form = RegisterForm()
         return render(request,'django_registration/registration_form.html', {'form': form})
+
+def index(request):
+    return render(request,'index.html')
+
+@login_required
+def profile(request):
+    return render(request, 'profile.html')
