@@ -12,6 +12,7 @@ class Profile(models.Model):
     contact = models.EmailField(max_length=100)
     name = models.CharField(blank=True,max_length=100)
     location = models.CharField(blank=True,max_length=100)
+    neighborhood = models.ForeignKey(User,on_delete=models.CASCADE,related_name='members')
 
     def __str__(self):
         return f'{self.user.username}Profile'
