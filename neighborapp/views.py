@@ -1,5 +1,7 @@
 from django.contrib.auth import login
 from django.shortcuts import  render, redirect
+
+from neighborapp.models import Neighborhood
 from .forms import RegisterForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
@@ -23,7 +25,8 @@ def registration(request):
         return render(request,'django_registration/registration_form.html', {'form': form})
 
 def index(request):
-    return render(request,'index.html')
+    all_hoods = Neighborhood.objects.all().order_by("location")
+    return render(request,'index.html', {'all_hoods': all_hoods})
 
 @login_required
 def profile(request):
