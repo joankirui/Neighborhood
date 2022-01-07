@@ -1,7 +1,7 @@
 from django.contrib.auth import login
 from django.shortcuts import  render, redirect
 
-from neighborapp.models import Neighborhood
+from neighborapp.models import Neighborhood, Profile
 from .forms import RegisterForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
@@ -51,3 +51,9 @@ def edit_profile(request):
         'profile_form': profile_form
     }
     return render(request, 'editprofile.html', args)
+
+def hood_members(request,hood_id):
+    hood = Neighborhood.objects.get(id=hood_id)
+    members = Profile.objects.filter(hood=hood)
+
+    return render(request, 'members.html',{'members': members} )
