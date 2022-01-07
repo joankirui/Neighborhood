@@ -63,10 +63,10 @@ def newhood(request):
         form = NeighbourHoodForm(request.POST, request.FILES)
         if form.is_valid():
             hood = form.save(commit=False)
-            hood.user = request.user
+            hood.admin = request.user.profile
             hood.save()
-            return redirect('/')
+            return redirect('index')
 
-        else:
-            form = NeighbourHoodForm()
-        return render(request, 'newhood.html' ,{'form': form})
+    else:
+        form = NeighbourHoodForm()
+    return render(request, 'newhood.html' ,{'form': form})
