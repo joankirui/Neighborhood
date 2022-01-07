@@ -10,6 +10,9 @@
             <img class="rounded-circle" style="height: 300px;width: 300px;" src="{{ user.profile.prof_pic.url }}" alt="profile photo">
             <h5 class="text-center mt-3"><strong>Username: </strong>{{user.username|title}}</h5>
             <p class="text-center"> <strong>Contact: </strong>{{user.email}}</p>
+            <p class="text-center"> <strong>Hood: </strong>{{user.profile.neighborhood}}</p>
+            <p class="text-center"> <strong>Location: </strong>{{user.profile.location}}</p>
+
         </div>
         <div class="col-md-3"></div>
     </div>
