@@ -2,7 +2,7 @@ from django import forms
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from .models import Profile,Neighborhood,Business
+from .models import Post, Profile,Neighborhood,Business
 
 # Create your forms here.
 class RegisterForm(UserCreationForm):
@@ -39,7 +39,7 @@ class BusinessForm(forms.ModelForm):
         exclude = ('user', 'neighbourhood')
 
 
-# class PostForm(forms.ModelForm):
-#     class Meta:
-#         model = Post
-#         exclude = ('user', 'hood')
+class PostForm(forms.ModelForm):
+    class Meta:
+        model = Post
+        exclude = ('user', 'hood')
