@@ -9,7 +9,8 @@ class Neighborhood(models.Model):
     name = models.CharField(max_length=50)
     location = models.CharField(max_length=60)
     admin = models.ForeignKey('Profile',on_delete=models.CASCADE, related_name='hood')
-
+    health_tell = models.IntegerField(null=True, blank=True)
+    police_number = models.IntegerField(null=True, blank=True)
     def __str__(self):
         return f'{self.name}hood'
 
@@ -23,6 +24,7 @@ class Neighborhood(models.Model):
     def find_neighborhood(cls,search_term):
         return cls.objects.filter(title__icontains=search_term)
 
+# User class
 class Profile(models.Model):
     user = models.OneToOneField(User,on_delete=models.CASCADE,related_name='profile')
     prof_pic = CloudinaryField('image')
@@ -44,3 +46,12 @@ class Profile(models.Model):
     @receiver(post_save, sender=User)
     def save_profile(sender, instance, **kwargs):
         instance.profile.save()
+
+class Business(models.Model):
+    name = models.CharField(max_length=130)
+    email = models.EmailField(max_length=255)
+    user = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='owner')
+    neighborhood = models.ForeignKey('Neighborhood',on_delete=models.CASCADE, related_name='business')
+
+    def __str__(self):
+        return f'{self.name} Business'
