@@ -13,7 +13,8 @@
                     <div class="card-text">
                         <form action="" method="post" enctype="multipart/form-data" novalidate>
                             {% csrf_token %}
-                            {{ form|crispy }}
+                            {{ user_form|crispy }}
+                            {{ profile_form|crispy }}
                             <button type="submit" class="btn btn-sm btn-info">Update</button>
 
                         </form>
