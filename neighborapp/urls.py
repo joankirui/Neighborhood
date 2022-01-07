@@ -11,6 +11,7 @@ urlpatterns=[
     path('update/',views.edit_profile, name='edit'),
     path('members/<hood_id>', views.hood_members, name='members'),
     path('new-hood/', views.newhood, name='newhood'),
+    path('newpost/<hood_id>', views.make_post, name='makepost'),
 
 ]
 if settings.DEBUG:
