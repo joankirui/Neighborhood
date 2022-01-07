@@ -1,8 +1,8 @@
 from django.contrib.auth import login
 from django.shortcuts import  render, redirect
 
-from neighborapp.models import Neighborhood, Profile
-from .forms import NeighbourHoodForm, PostForm, RegisterForm
+from neighborapp.models import Business, Neighborhood, Post, Profile
+from .forms import BusinessForm, NeighbourHoodForm, PostForm, RegisterForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.contrib import messages
@@ -84,3 +84,28 @@ def make_post(request,hood_id):
     else:
         form = PostForm()
     return render(request, 'post.html',{'form': form})
+
+def single_hood(request,hood_id):
+    hood = Neighborhood.objects.get(id=hood_id)
+    business = Business.objects.filter(hood=hood)
+    posts = Post.objects.filter(hood=hood)
+    
+    if request.method == 'POST':
+        form = BusinessForm(request.POST)
+        if form.is_valid():
+            bform = form.save(commit=False)
+            bform.hood = hood
+            bform.user = request.user.profile
+            bform.save()
+            return redirect('singlehood', hood.id)
+        
+    else:
+        form = BusinessForm()
+    args = {
+        'hood': hood,
+        'business': business,
+        'form': form,
+        'posts': posts
+    }
+    return render(request, 'singlehood.html',args)
+
