@@ -2,7 +2,7 @@ from django.contrib.auth import login
 from django.shortcuts import  render, redirect
 
 from neighborapp.models import Neighborhood, Profile
-from .forms import NeighbourHoodForm, RegisterForm
+from .forms import NeighbourHoodForm, PostForm, RegisterForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.contrib import messages
@@ -70,3 +70,17 @@ def newhood(request):
     else:
         form = NeighbourHoodForm()
     return render(request, 'newhood.html' ,{'form': form})
+
+def make_post(request,hood_id):
+    hood = Neighborhood.objects.get(id=hood_id)
+    if request.method == 'POST':
+        form = PostForm(request.POST)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.hood = hood
+            post.user = request.user.profile
+            post.save()
+            return redirect('singlehood', hood.id)
+    else:
+        form = PostForm()
+    return render(request, 'post.html',{'form': form})
