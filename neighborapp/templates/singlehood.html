@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+{% load static %}
+
+<div class="container" style="margin-top: -4;">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card mb-4">
+                <div class="row">
+                    <div class="col-md-5">
+                    <img class="card-img-top" src="{{ hood.hood_logo.url }}" alt="logo"></div>
+                    <div class="col-md-7">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ hood.name }} [{{ hood.location }}]</h5>
+                            <h5 class="card-text">
+                                <span><strong>{{ hood.members.count}}</strong> Member{{hood.members.count|pluralize}}</span><strong>{{ hood.business.count}}</strong>Businesses |
+                                <strong>{{ hood.hood_post.count}}</strong>Post{{ hood.hood_post.count|pluralize }}
+                            </h5>
+                            <p class="card-text">Police Line: <strong>{{ hood.police_number }}</strong></p>
+                            <p class="card-text">Hospital Line: <strong>{{ hood.health_tell }}</strong></p>
+                            <p class="card-text">Administrator: {{ hood.admin.user.username }}</p>
+                        </div>
+                    </div>
+                </div>
+              </div>
+        </div>
+    </div>
+<div class="container bg-white">
+    <div class="row">
+        
+    </div>
+</div>
+</div>
+{% endblock %}

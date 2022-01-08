@@ -1,5 +1,5 @@
 from django.contrib.auth import login
-from django.shortcuts import  render, redirect
+from django.shortcuts import  get_object_or_404, render, redirect
 
 from neighborapp.models import Business, Neighborhood, Post, Profile
 from .forms import BusinessForm, NeighbourHoodForm, PostForm, RegisterForm
@@ -109,3 +109,14 @@ def single_hood(request,hood_id):
     }
     return render(request, 'singlehood.html',args)
 
+def join_hood(request, id):
+    neighborhood = get_object_or_404(Neighborhood,id=id)
+    request.user.profile.neighbourhood = neighborhood
+    request.user.profile.save()
+    return redirect('hood')
+
+def leave_hood(request, id):
+    hood = get_object_or_404(Neighborhood,id=id)
+    request.user.profile.neighbourhood = None
+    request.user.profile.save()
+    return redirect('hood')
