@@ -11,12 +11,17 @@
             <div class="card mb-4 mt-4" style="min-height:200px;">
                 <img class="card-img-top" src="{{ hood.hood_logo.url }}" alt="{{ hood.name }}">
                 <div class="card-body">
-                  <h5 class="card-title">{{ hood.name }}  [{{ hood.location }}]<span class="ml-4">{{ hood.members.count }} member(s)</span></h5>
+                  <h5 class="card-title">{{ hood.name }}  [{{ hood.location }}]<span class="ml-4">{{ hood.members.count }} member{{hood.members.count|pluralize}}</span></h5>
                   <p class="card-text"></p>
+                  {% if request.user.profile.neighborhood == hood %}
+                  <a href="{% url 'leave_hood' hood.id%}" class="btn btn-danger btn-sm">Leave Hood</a>
+                  {% elif not request.user.profile.neighborhood %}
+                  <a href="{% url 'join_hood' hood.id%}" class="btn btn-primary btn-sm">Join Hood</a>
+                  {% endif %}
                 </div>
               </div>
         </div>
+        {% endfor %}
     </div>
-    {% endfor %}
 </div>
 {% endblock %}

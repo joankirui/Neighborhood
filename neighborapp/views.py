@@ -54,7 +54,7 @@ def edit_profile(request):
 
 def hood_members(request,hood_id):
     hood = Neighborhood.objects.get(id=hood_id)
-    members = Profile.objects.filter(hood=hood)
+    members = Profile.objects.filter(neighborhood=hood)
 
     return render(request, 'members.html',{'members': members} )
 
@@ -87,7 +87,7 @@ def make_post(request,hood_id):
 
 def single_hood(request,hood_id):
     hood = Neighborhood.objects.get(id=hood_id)
-    business = Business.objects.filter(hood=hood)
+    business = Business.objects.filter(neighborhood=hood)
     posts = Post.objects.filter(hood=hood)
     
     if request.method == 'POST':
@@ -111,12 +111,12 @@ def single_hood(request,hood_id):
 
 def join_hood(request, id):
     neighborhood = get_object_or_404(Neighborhood,id=id)
-    request.user.profile.neighbourhood = neighborhood
+    request.user.profile.neighborhood = neighborhood
     request.user.profile.save()
     return redirect('hood')
 
 def leave_hood(request, id):
     hood = get_object_or_404(Neighborhood,id=id)
-    request.user.profile.neighbourhood = None
+    request.user.profile.neighborhood = None
     request.user.profile.save()
     return redirect('hood')
