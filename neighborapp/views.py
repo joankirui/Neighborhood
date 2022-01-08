@@ -1,6 +1,5 @@
 from django.contrib.auth import login
 from django.shortcuts import  get_object_or_404, render, redirect
-
 from neighborapp.models import Business, Neighborhood, Post, Profile
 from .forms import BusinessForm, NeighbourHoodForm, PostForm, RegisterForm
 from django.contrib.auth.decorators import login_required
@@ -23,12 +22,12 @@ def registration(request):
         else:
             form = RegisterForm()
         return render(request,'django_registration/registration_form.html', {'form': form})
-
+@login_required(login_url='/accounts/login/')
 def index(request):
     all_hoods = Neighborhood.objects.all().order_by("location")
     return render(request,'index.html', {'all_hoods': all_hoods})
 
-@login_required
+@login_required(login_url='/accounts/login/')
 def profile(request):
     return render(request, 'profile.html')
 
@@ -52,12 +51,14 @@ def edit_profile(request):
     }
     return render(request, 'editprofile.html', args)
 
+@login_required(login_url='/accounts/login/')
 def hood_members(request,hood_id):
     hood = Neighborhood.objects.get(id=hood_id)
     members = Profile.objects.filter(neighborhood=hood)
 
     return render(request, 'members.html',{'members': members} )
 
+@login_required(login_url='/accounts/login/')
 def newhood(request):
     if request.method == 'POST':
         form = NeighbourHoodForm(request.POST, request.FILES)
@@ -71,6 +72,7 @@ def newhood(request):
         form = NeighbourHoodForm()
     return render(request, 'newhood.html' ,{'form': form})
 
+@login_required(login_url='/accounts/login/')
 def make_post(request,hood_id):
     hood = Neighborhood.objects.get(id=hood_id)
     if request.method == 'POST':
@@ -85,6 +87,7 @@ def make_post(request,hood_id):
         form = PostForm()
     return render(request, 'post.html',{'form': form})
 
+@login_required(login_url='/accounts/login/')
 def single_hood(request,hood_id):
     hood = Neighborhood.objects.get(id=hood_id)
     business = Business.objects.filter(neighborhood=hood)
@@ -109,12 +112,14 @@ def single_hood(request,hood_id):
     }
     return render(request, 'singlehood.html',args)
 
+@login_required(login_url='/accounts/login/')
 def join_hood(request, id):
     neighborhood = get_object_or_404(Neighborhood,id=id)
     request.user.profile.neighborhood = neighborhood
     request.user.profile.save()
     return redirect('index')
 
+@login_required(login_url='/accounts/login/')
 def leave_hood(request, id):
     hood = get_object_or_404(Neighborhood,id=id)
     request.user.profile.neighborhood = None
