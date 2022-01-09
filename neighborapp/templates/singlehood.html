@@ -14,12 +14,12 @@
                         <div class="card-body">
                             <h5 class="card-title">{{ hood.name }} [{{ hood.location }}]</h5>
                             <h5 class="card-text">
-                                <span><strong>{{ hood.members.count }}</strong> Member{{ hood.members.count|pluralize }}</span><strong>{{ hood.business.count}}</strong>Businesses |
+                                <span><strong>{{ hood.members.count }}</strong> Member{{ hood.members.count|pluralize }} | </span><strong>{{ hood.business.count}}</strong>Businesses |
                                 <strong>{{ hood.hood_post.count}}</strong>Post{{ hood.hood_post.count|pluralize }}
                             </h5>
-                            <p class="card-text">Police Line: <strong>{{ hood.police_number }}</strong></p>
-                            <p class="card-text">Hospital Line: <strong>{{ hood.health_tell }}</strong></p>
-                            <p class="card-text">Administrator: {{ hood.admin.user.username }}</p>
+                            <p class="card-text">Police Line: <strong>{{ hood.police_number }} | </strong>
+                            Hospital Line: <strong>{{ hood.health_tell }}</strong></p>
+                            <p class="card-text">Administrator: <span class="text-muted">{{ hood.admin.user.username }}</span></p>
                         </div>
                     </div>
                 </div>
@@ -33,7 +33,7 @@
             <a class="btn btn-sm btn-outline-info mb-4 mr-4" href="{% url 'makepost' hood.id %}">Add Post</a>
             {% if hood.admin == user.profile %}
             <a href="{% url 'members' hood.id %}" class="btn btn-sm btn-outline-info mb-4 mr-4">Members</a>
-            {% endif %}
+            {% endif %}<br>
             <form class="form-inline my-2 my-lg-0" role="search" action=" ">
                 <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="title">
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><i class="fa fa-search">search</i></button>

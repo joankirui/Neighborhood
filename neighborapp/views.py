@@ -125,3 +125,17 @@ def leave_hood(request, id):
     request.user.profile.neighborhood = None
     request.user.profile.save()
     return redirect('index')
+
+@login_required(login_url='/accounts/login/')
+def search_business(request):
+
+    if 'title' in request.GET and request.GET["title"]:
+        search_term = request.GET.get("title")
+        results = Business.search_by_title(search_term)
+        message = f"{search_term}"
+
+        return render(request, 'search.html',{"message":message,"results":results})
+
+    else:
+        message = "You haven't searched for any term"
+        return render(request, 'search.html',{"message":message})
