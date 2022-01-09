@@ -29,11 +29,14 @@
 <div class="container bg-white">
     <div class="row">
         <div class="col-md-11">
-            <a href="" class="btn btn-outline-info" data-toggle="modal" data-target="#addingbiz">Add Business</a>
-            <a class="btn btn-sm btn-outline-info" href="{% url 'make_post' hood.id %}">Add Post</a>
+            <a href="" class="btn btn-outline-info mb-4 mr-4" data-toggle="modal" data-target="#addingbiz">Add Business</a>
+            <a class="btn btn-sm btn-outline-info mb-4 mr-4" href="{% url 'makepost' hood.id %}">Add Post</a>
+            {% if hood.admin == user.profile %}
+            <a href="{% url 'members' hood.id %}" class="btn btn-sm btn-outline-info mb-4 mr-4">Members</a>
+            {% endif %}
             <form class="form-inline my-2 my-lg-0" role="search" action=" ">
                 <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="title">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><i class="fa fa-search"></i></button>
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><i class="fa fa-search">search</i></button>
             </form>
             <h4>Businesses</h4>
             <hr>
@@ -45,7 +48,6 @@
                             <h5 class="card-title">{{biz.name}}
                             </h5>
                             <p class="card-text">{{biz.email}}</p>
-                            <p class="card-text">{{biz.description}}</p>
                             <p class="card-text">Owner: <small class="text-muted">
                                 {{ biz.user.user.username|title }}</small></p>
                         </div>
@@ -84,7 +86,7 @@
                     <div class="modal-body">
                         <form action="" method="post">
                             {% csrf_token%}
-                            {{form|crispy}}
+                            {{form|crispy}} &nbsp;
                             <button type="submit" class="btn btn-sm btn-success">Save Business</button>
                             <button type="button" class="btn btn-sm btn-outline-danger " data-dismiss="modal">
                                 Close

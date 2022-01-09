@@ -3,12 +3,18 @@
 {% block content %}
 {% load static %}
 
+<style>
+  .card {
+    box-shadow: 0 0 11px 7px rgb(103 59 183 / 10%);
+  }
+
+</style>
 <div class="container">
     <a href="new-hood/" class="btn btn-sm btn-info mt-4">New Hood</a>
     <div class="row">
         {% for hood in all_hoods %}
         <div class="col-md-5">
-            <div class="card mb-4 mt-4" style="min-height:200px;">
+            <div class="card  bg-light mb-3 mt-4" style="min-height:250px;width: 19rem;">
                 <img class="card-img-top" src="{{ hood.hood_logo.url }}" alt="{{ hood.name }}">
                 <div class="card-body">
                   <h5 class="card-title">{{ hood.name }}  [{{ hood.location }}]<span class="ml-4">{{ hood.members.count }} member{{hood.members.count|pluralize}}</span></h5>

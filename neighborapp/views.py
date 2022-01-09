@@ -82,7 +82,7 @@ def make_post(request,hood_id):
             post.hood = hood
             post.user = request.user.profile
             post.save()
-            return redirect('singlehood', hood.id)
+            return redirect('single-hood', hood.id)
     else:
         form = PostForm()
     return render(request, 'post.html',{'form': form})
@@ -100,17 +100,17 @@ def single_hood(request,hood_id):
             bform.hood = hood
             bform.user = request.user.profile
             bform.save()
-            return redirect('singlehood', hood.id)
+            return redirect('single-hood', hood.id)
         
-    else:
+    else:  
         form = BusinessForm()
     args = {
         'hood': hood,
         'business': business,
         'form': form,
-        'posts': posts
+        'posts': posts,
     }
-    return render(request, 'singlehood.html',args)
+    return render(request, 'singlehood.html',args) 
 
 @login_required(login_url='/accounts/login/')
 def join_hood(request, id):
