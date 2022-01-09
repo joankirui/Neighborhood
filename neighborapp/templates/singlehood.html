@@ -34,8 +34,8 @@
             {% if hood.admin == user.profile %}
             <a href="{% url 'members' hood.id %}" class="btn btn-sm btn-outline-info mb-4 mr-4">Members</a>
             {% endif %}<br>
-            <form class="form-inline my-2 my-lg-0" role="search" action=" ">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="title">
+            <form class="form-inline my-2 my-lg-0" role="search" action="{% url 'search_business' %}">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search business" aria-label="Search" name="title">
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><i class="fa fa-search">search</i></button>
             </form>
             <h4>Businesses</h4>

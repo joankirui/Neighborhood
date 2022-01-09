@@ -129,9 +129,9 @@ def leave_hood(request, id):
 @login_required(login_url='/accounts/login/')
 def search_business(request):
 
-    if 'title' in request.GET and request.GET["title"]:
-        search_term = request.GET.get("title")
-        results = Business.search_by_title(search_term)
+    if 'email' in request.GET and request.GET["email"]:
+        search_term = request.GET.get("email")
+        results = Business.search_by_email(search_term)
         message = f"{search_term}"
 
         return render(request, 'search.html',{"message":message,"results":results})

@@ -56,6 +56,10 @@ class Business(models.Model):
     def __str__(self):
         return f'{self.name} Business'
 
+    @classmethod
+    def search_by_email(cls,search_term):
+        return cls.objects.filter(email__icontains=search_term)
+
 class Post(models.Model):
     title = models.CharField(max_length=130, null=True)
     post = models.TextField()
