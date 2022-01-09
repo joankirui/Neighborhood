@@ -16,6 +16,7 @@ urlpatterns=[
     path('single_hood/<hood_id>', views.single_hood, name='single-hood'),
     path('join_hood/<id>', views.join_hood, name='join_hood'),
     path('leave_hood/<id>', views.leave_hood,name='leave_hood'),
+    path('search',views.search_business, name='search_business')
 
 ]
 if settings.DEBUG:
