@@ -1,5 +1,5 @@
 ## Neighborhood
-![Awards!](static/images/main.png)
+![Awards!](static/images/hood.png)
 ## Author
 [Joan Kirui](https://github.com/joankirui)
 
