@@ -3,7 +3,7 @@
 {% block content %}
 {% load static %}
 
-<div class="container" style="margin-top: -4;">
+<div class="container" style="margin-top: 5%;">
     <div class="row">
         <div class="col-md-12">
             <div class="card mb-4">
@@ -45,9 +45,9 @@
                 <div class="col-md-4">
                     <div class="card mb-4">
                         <div class="card-body">
-                            <h5 class="card-title">{{biz.name}}
+                            <h5 class="card-title"><strong>{{biz.name}}</strong>
                             </h5>
-                            <p class="card-text">{{biz.email}}</p>
+                            <p class="card-text">Email: {{biz.email}}</p>
                             <p class="card-text">Owner: <small class="text-muted">
                                 {{ biz.user.user.username|title }}</small></p>
                         </div>

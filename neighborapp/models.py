@@ -51,14 +51,17 @@ class Business(models.Model):
     name = models.CharField(max_length=130)
     email = models.EmailField(max_length=255)
     user = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='owner')
-    neighborhood = models.ForeignKey('Neighborhood',on_delete=models.CASCADE, related_name='business')
+    neighborhood = models.ForeignKey('Neighborhood',on_delete=models.CASCADE, related_name='hood_business')
 
     def __str__(self):
         return f'{self.name} Business'
 
+    def save_business(self):
+        self.save()
+
     @classmethod
-    def search_by_email(cls,search_term):
-        return cls.objects.filter(email__icontains=search_term)
+    def search_by_name(cls,search_term):
+        return cls.objects.filter(name__icontains=search_term)
 
 class Post(models.Model):
     title = models.CharField(max_length=130, null=True)
