@@ -9,7 +9,7 @@ This is a neighborhood app where a user must signup first, be able to join a hoo
 
 
 ## Live Link
-<!-- To view site [click here](https://jkawards.herokuapp.com/) -->
+To view site [click here](https://hoodjk.herokuapp.com/)
 
 ## User Story
 * Sign in with the application to start using.
