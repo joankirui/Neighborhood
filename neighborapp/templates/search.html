@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block content %}
+<style>
+    .pic {
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+
+    }
+</style>
+<div class="container">
+    {% if results %}
+    <p>You searched for {{results.count}} business</p>
+    {% for biz in results %}
+    <div class="col-md-4 mb-4">
+        <div class="card mb-4" style="width: 18rem;">
+            <div class="card-body">
+            <h4 class="card-title">{{ biz.name }}</h4>
+            <p class="card-text">Owner: <span class="text-muted">{{ biz.user.user.username|title }}</span></p>
+            <p class="card-text">Email: {{ biz.email }}</p>
+            </div>
+        </div>
+    </div>
+
+    {% endfor %}
+    {% else %}
+    <p>No businesses found</p>
+    {% endif %}
+</div>
+{% endblock %}
